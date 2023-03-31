@@ -12,7 +12,7 @@ class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    post = db.relationship('post', backref = 'user', lazy=True)
+    post = relationship ("Post", backref = 'user', lazy=True)
     
 
 class Post(Base):
@@ -25,25 +25,25 @@ class Comment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    comment_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
 
 class Location(Base):
     __tablename__ = 'location'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    location_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
 
 class Media(Base):
     __tablename__ ='media'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    media_id = Column(Integer, ForeignKey('post.id'))
+    post_id = Column(Integer, ForeignKey('post.id'))
 
 class Follower(Base):
     __tablename__ = 'follower'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    follower_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
 
     def to_dict(self):
         return {}

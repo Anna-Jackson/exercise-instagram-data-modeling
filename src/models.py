@@ -12,13 +12,14 @@ class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    post = db.relationship('post', backref = 'user', lazy=True)
     
 
 class Post(Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
-    post_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
 
 class Comment(Base):
     __tablename__ = 'comment'
